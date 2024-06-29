@@ -20,5 +20,9 @@ public class PlayerMove : MonoBehaviour
 
             _playerRb.AddForce(movement * Vector2.right);
         }
+        else
+        {
+            _playerRb.velocity = new Vector2(0, _playerRb.velocity.y);
+        }
     }
 }

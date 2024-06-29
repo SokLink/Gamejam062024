@@ -6,6 +6,7 @@ public class ElectricalPanel : InteractableObject
 
     protected override void DoOnInteract()
     {
-        _electricPanel.SetActive(!_electricPanel.active);
+        _electricPanel.SetActive(!_electricPanel.activeSelf);
+        PlayerMove.CanMove = !PlayerMove.CanMove;
     }
 }
