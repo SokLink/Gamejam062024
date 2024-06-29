@@ -6,15 +6,19 @@ public class PlayerMove : MonoBehaviour
     [SerializeField, Range(0, 25f)] private float _speed;
     [SerializeField, Range(0, 100f)] private float _acceleration;
 
+    public static bool CanMove = true;
 
     private void FixedUpdate()
     {
-        float targetSpeed = GameInputHandler.MoveDirection.x * _speed;
+        if (CanMove)
+        {
+            float targetSpeed = GameInputHandler.MoveDirection.x * _speed;
 
-        float deltaSpeed = targetSpeed - _playerRb.velocity.x;
+            float deltaSpeed = targetSpeed - _playerRb.velocity.x;
 
-        float movement = (Mathf.Abs(deltaSpeed) * _acceleration) * Mathf.Sign(deltaSpeed);
+            float movement = (Mathf.Abs(deltaSpeed) * _acceleration) * Mathf.Sign(deltaSpeed);
 
-        _playerRb.AddForce(movement * Vector2.right);
+            _playerRb.AddForce(movement * Vector2.right);
+        }
     }
 }

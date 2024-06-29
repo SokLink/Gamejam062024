@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class ElectricalPanel : InteractableObject
 {
+    [SerializeField] private GameObject _electricPanel;
+
     protected override void DoOnInteract()
     {
-        if (CanInteract) print("interact");
+        _electricPanel.SetActive(!_electricPanel.active);
     }
 }

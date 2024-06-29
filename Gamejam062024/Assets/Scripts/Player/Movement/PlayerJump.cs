@@ -38,7 +38,7 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump()
     {
-        if (_isGrounded)
+        if (_isGrounded && PlayerMove.CanMove)
         {
             _playerRb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
         }

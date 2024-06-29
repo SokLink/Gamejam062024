@@ -6,7 +6,7 @@ public abstract class InteractableObject : MonoBehaviour
 
     protected bool CanInteract = false;
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == _playerTag)
         {
@@ -15,14 +15,27 @@ public abstract class InteractableObject : MonoBehaviour
         else CanInteract = false;
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        CanInteract = false;
+    }
+
+    private void CheckCanInteract()
+    {
+        if (CanInteract)
+        {
+            DoOnInteract();
+        }
+    }
+
     protected abstract void DoOnInteract();
 
     private void OnEnable()
     {
-        GameInputHandler.OnInteractPressed += DoOnInteract;
+        GameInputHandler.OnInteractPressed += CheckCanInteract;
     }
     private void OnDisable()
     {
-        GameInputHandler.OnInteractPressed -= DoOnInteract;
+        GameInputHandler.OnInteractPressed -= CheckCanInteract;
     }
 }
