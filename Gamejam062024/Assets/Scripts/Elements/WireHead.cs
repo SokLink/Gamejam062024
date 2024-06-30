@@ -4,7 +4,14 @@ public class WireHead : MonoBehaviour
 {
     public Transform WireHeadTransform;
     public CanvasGroup WireHeadCanvasGroup;
-    public Transform DefaultParent { get; set; }
+
+    [SerializeField] private Transform _defaultParent;
+
+    public Transform DefaultParent
+    {
+        get { return _defaultParent; }
+        set { _defaultParent = value; }
+    }
 
     private void OnValidate()
     {

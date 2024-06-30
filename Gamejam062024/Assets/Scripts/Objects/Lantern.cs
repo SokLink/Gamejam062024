@@ -6,7 +6,7 @@ public class Lantern : ActivatedObject
     [SerializeField] private GameObject _light;
     [SerializeField] private List<GameObject> _shadows = new List<GameObject>();
 
-    private void FixedUpdate()
+    protected override void DoOnActive()
     {
         if (IsActive)
         {

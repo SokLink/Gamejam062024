@@ -4,9 +4,20 @@ public class WireConnection : MonoBehaviour
 {
     [SerializeField] private LineRenderer _lineRenderer;
 
+    [SerializeField] private WireHead _startWireHead;
+    [SerializeField] private WireHead _endWireHead;
+
     public Color WireColor = Color.red;
-    public WireHead StartWireHead { get; set; }
-    public WireHead EndWireHead { get; set; }
+    public WireHead StartWireHead
+    {
+        get { return _startWireHead; }
+        set { _startWireHead = value; }
+    }
+    public WireHead EndWireHead
+    {
+        get { return _endWireHead; }
+        set { _endWireHead = value; }
+    }
 
     private void OnValidate()
     {

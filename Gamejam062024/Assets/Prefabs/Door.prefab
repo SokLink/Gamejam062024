@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088e4d64d13e92d448616a09eccdfb73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _yOffset: 4
+  _offset: {x: 0, y: 4}
   _transform: {fileID: 8360539768541364587}
 --- !u!61 &2472834696997435559
 BoxCollider2D:

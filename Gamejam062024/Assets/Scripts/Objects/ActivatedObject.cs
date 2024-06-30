@@ -1,6 +1,17 @@
 using UnityEngine;
 
-public class ActivatedObject : MonoBehaviour
+public abstract class ActivatedObject : MonoBehaviour
 {
-    public bool IsActive { get; set; } = false;
+    private bool _isActivated = false;
+    public bool IsActive
+    {
+        get { return _isActivated; }
+        set
+        {
+            _isActivated = value;
+            DoOnActive();
+        }
+    }
+
+    protected abstract void DoOnActive();
 }

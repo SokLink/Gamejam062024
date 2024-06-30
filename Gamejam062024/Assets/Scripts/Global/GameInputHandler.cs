@@ -10,9 +10,13 @@ public class GameInputHandler : MonoBehaviour
 
     void Update()
     {
+        MoveDirection = Vector2.zero;
+
         if (Input.GetKey(KeyCode.A)) MoveDirection += Vector2.left;
-        else if (Input.GetKey(KeyCode.D)) MoveDirection += Vector2.right;
-        else MoveDirection = Vector2.zero;
+        if (Input.GetKey(KeyCode.D)) MoveDirection += Vector2.right;
+
+        if (Input.GetKey(KeyCode.W)) MoveDirection += Vector2.up;
+        if (Input.GetKey(KeyCode.S)) MoveDirection += Vector2.down;
 
         MoveDirection = MoveDirection.normalized;
 

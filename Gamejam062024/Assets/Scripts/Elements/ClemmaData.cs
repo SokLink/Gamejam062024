@@ -10,5 +10,11 @@ public class ClemmaData : MonoBehaviour
 
     public ClemmaType Type;
 
-    public WireConnection Connection { get; set; } = null;
+    [SerializeField] private WireConnection _connection = null;
+
+    public WireConnection Connection
+    {
+        get {  return _connection; }
+        set { _connection = value; }
+    }
 }
