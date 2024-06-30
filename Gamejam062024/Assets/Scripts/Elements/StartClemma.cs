@@ -26,6 +26,14 @@ public class StartClemma : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             Destroy(_clemmaData.Connection.EndWireHead.gameObject);
             Destroy(_clemmaData.Connection.gameObject);
         }
+        else if (Inventory.ProvodaCount <= 0)
+        {
+            return;
+        }
+        else
+        {
+            Inventory.ProvodaCount -= 1;
+        }
 
         WireHead startWireHead = Instantiate(GameComponentsBus.WirePref, _clemmaTransform.position, Quaternion.identity);
         startWireHead.DefaultParent = _clemmaTransform;
@@ -36,26 +44,35 @@ public class StartClemma : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         endWireHead.WireHeadCanvasGroup.blocksRaycasts = false;
 
         _clemmaData.Connection = Instantiate(GameComponentsBus.WireConnectionPref, Vector2.zero, Quaternion.identity);
+        _clemmaData.Connection.gameObject.transform.parent = _clemmaTransform;
         _clemmaData.Connection.StartWireHead = startWireHead;
         _clemmaData.Connection.EndWireHead = endWireHead;
+
+        if (_clemmaData.Type == 0) _clemmaData.Connection.WireColor = Color.red;
+        else if ((int)_clemmaData.Type == 1) _clemmaData.Connection.WireColor = Color.blue;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        _clemmaData.Connection.EndWireHead.WireHeadTransform.position = (Vector2)GameComponentsBus.MainCamera.ScreenToWorldPoint(eventData.position);
+        if (_clemmaData.Connection != null) _clemmaData.Connection.EndWireHead.WireHeadTransform.position = (Vector2)GameComponentsBus.MainCamera.ScreenToWorldPoint(eventData.position);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (_clemmaData.Connection.EndWireHead.DefaultParent != null)
+        if (_clemmaData.Connection != null)
         {
-            _clemmaData.Connection.EndWireHead.WireHeadTransform.SetParent(_clemmaData.Connection.EndWireHead.DefaultParent);
-        }
-        else
-        {
-            Destroy(_clemmaData.Connection.StartWireHead.gameObject);
-            Destroy(_clemmaData.Connection.EndWireHead.gameObject);
-            Destroy(_clemmaData.Connection.gameObject);
+            if (_clemmaData.Connection.EndWireHead.DefaultParent != null)
+            {
+                _clemmaData.Connection.EndWireHead.WireHeadTransform.SetParent(_clemmaData.Connection.EndWireHead.DefaultParent);
+            }
+            else
+            {
+                Inventory.ProvodaCount += 1;
+
+                Destroy(_clemmaData.Connection.StartWireHead.gameObject);
+                Destroy(_clemmaData.Connection.EndWireHead.gameObject);
+                Destroy(_clemmaData.Connection.gameObject);
+            }
         }
     }
 

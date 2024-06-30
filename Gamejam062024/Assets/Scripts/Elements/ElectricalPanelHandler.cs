@@ -1,21 +1,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElectricalPanelHandler : MonoBehaviour
+public class ElectricalPanelHandler : ActivatedObject
 {
     [SerializeField] private List<Element> _elements = new List<Element>();
-
-    public bool ElectricalPanelIsActive { get; private set; }
+    [SerializeField] private ActivatedObject _condition;
 
     private void FixedUpdate()
     {
-        ElectricalPanelIsActive = true;
-
-        foreach (Element element in _elements)
+        if (_condition == null || _condition.IsActive)
         {
-            if (!element.ElementIsActive) ElectricalPanelIsActive = false;
-        }
+            IsActive = true;
 
-        if (ElectricalPanelIsActive) print($"{gameObject.name} is active");
+            foreach (Element element in _elements)
+            {
+                if (!element.ElementIsActive) IsActive = false;
+            }
+        }
+        else
+        {
+            IsActive = false;
+        }
     }
 }

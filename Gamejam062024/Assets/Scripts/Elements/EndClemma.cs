@@ -18,15 +18,18 @@ public class EndClemma : MonoBehaviour, IDropHandler
     {
         if (eventData.pointerDrag.TryGetComponent(out StartClemma startClemma) && _clemmaData.Connection == null)
         {
-            if (startClemma.StartClemmaData.Type == _clemmaData.Type)
+            if (startClemma.StartClemmaData.Connection != null)
             {
-                startClemma.StartClemmaData.Connection.EndWireHead.DefaultParent = _clemmaTransform;
-                startClemma.StartClemmaData.Connection.EndWireHead.WireHeadTransform.position = _clemmaTransform.position;
-                _clemmaData.Connection = startClemma.StartClemmaData.Connection;
-            }
-            else
-            {
-                print("›À≈ “–ŒÿŒ !");
+                if (startClemma.StartClemmaData.Type == _clemmaData.Type)
+                {
+                    startClemma.StartClemmaData.Connection.EndWireHead.DefaultParent = _clemmaTransform;
+                    startClemma.StartClemmaData.Connection.EndWireHead.WireHeadTransform.position = _clemmaTransform.position;
+                    _clemmaData.Connection = startClemma.StartClemmaData.Connection;
+                }
+                else
+                {
+                    print("›À≈ “–ŒÿŒ !");
+                }
             }
         }
     }
